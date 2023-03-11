@@ -100,6 +100,11 @@
             background-color: #a883ff;
         }
 
+        #btn:disabled {
+            opacity: .4;
+            cursor: default;
+        }
+
         @media screen and (max-width: 500px) {
             #negativo {
                 margin-top: 20px;
@@ -121,6 +126,7 @@
                 height: auto;
                 min-width: 300px;
             }
+        
         }
 
     </style>
@@ -128,7 +134,7 @@
 <body>
     <div class="resultados">
         <label for="nome">Insira seu nome</label>
-        <input type="text" id="nome">
+        <input type="text" id="nome" onchange="toggleButton()">
 
         <div id="positivo">
             <h2>Ihhh! Você é viado</h2>
@@ -143,10 +149,21 @@
         </div>
 
         <div class="butao">
-            <button id="btn" onclick="verificar()">Verificar se é viado</button>
+            <button id="btn" onclick="verificar(); toggleButton();" disabled>Verificar se é viado</button>
         </div>
 
         <script>
+            
+            function toggleButton() {
+                const nome = document.querySelector('#nome').value;
+
+                if (nome) {
+                    document.querySelector('#btn').disabled = false;
+                    return
+                }
+                document.querySelector('#btn').disabled = true;
+            }
+
             function verificar() {
                 let nome = document.getElementById("nome").value.toLowerCase();
                 let positivo = document.getElementById("positivo");
@@ -154,7 +171,7 @@
                 let nulo = document.getElementById("nulo");
 
                 if (nome === '') {
-                    nulo.style.display = "block";
+                    nulo.style.display = "block"; 
                     positivo.style.display = "none";
                     negativo.style.display = "none";
                 }
@@ -171,7 +188,9 @@
                     nulo.style.display = "none";
                 }
             }
-
+            
+            document.querySelector('#login').disabled = true;
+            
             document.addEventListener("keypress", function(e) {
                 if(e.key === 'Enter') {
   
@@ -179,7 +198,7 @@
     
                 btn.click();
             }
-});
+            });
         </script>
     </div>
 </body>
