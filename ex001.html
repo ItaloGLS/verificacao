@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        body {
+            margin: 0;
+            background-color: #121214;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .resultados {
+            width: 30vw;
+            height: 32vh;
+            color: white;
+            background-color: #202024;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resultados label {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        #positivo {
+            display: none;
+            background-color: rgb(255, 110, 110);
+            border-radius: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #negativo {
+            display: none;
+            background-color: rgb(108, 188, 138);
+            border-radius: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #nulo {
+            display: none;
+            background-color: rgb(255, 110, 110);
+            border-radius: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #nome {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            background-color: #121214;
+            color: #eaeaea;
+            margin-bottom: 10px;
+        }
+
+        .butao {
+            display: flex;
+            height: 100%;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+
+        #btn {
+            display: flex;
+            padding: 15px;
+            width: 100%;
+            justify-content: center;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            background-color: #8257e5;
+            transition: 200ms;
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+        }
+
+        #btn:hover {
+            background-color: #a883ff;
+        }
+
+        @media screen and (max-width: 500px) {
+            .resultados {
+                min-width: 300px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="resultados">
+        <label for="nome">Insira seu primeiro nome</label>
+        <input type="text" id="nome">
+
+        <div id="positivo">
+            <h2>Ihhh! Você é viado</h2>
+        </div>
+
+        <div id="negativo">
+            <h2>Você não é viado</h2>
+        </div>
+
+        <div id="nulo">
+            <h2>Digite seu nome para prosseguir!</h2>
+        </div>
+
+        <div class="butao">
+            <button id="btn" onclick="verificar()">Verificar se é viado</button>
+        </div>
+
+        <script>
+            function verificar() {
+                let nome = document.getElementById("nome").value.toLowerCase();
+                let positivo = document.getElementById("positivo");
+                let negativo = document.getElementById("negativo");
+                let nulo = document.getElementById("nulo");
+
+                if (nome === '') {
+                    nulo.style.display = "block";
+                    positivo.style.display = "none";
+                    negativo.style.display = "none";
+                }
+
+                else if (nome.includes('alan') || nome.includes('italo') || nome.includes('eder') || nome.includes('guilherme') || nome.includes('joao')) { 
+                    positivo.style.display = "block";
+                    negativo.style.display = "none";
+                    nulo.style.display = "none";
+                }
+
+                else {
+                    positivo.style.display = "none";
+                    negativo.style.display = "block";
+                    nulo.style.display = "none";
+                }
+            }
+
+            document.addEventListener("keypress", function(e) {
+                if(e.key === 'Enter') {
+  
+                    var btn = document.querySelector("#btn");
+    
+                btn.click();
+            }
+});
+        </script>
+    </div>
+</body>
+</html>
